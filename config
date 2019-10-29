@@ -180,7 +180,7 @@ bindsym $alt+a focus parent
 # focus the child container
 #bindsym $alt+d focus child
 
-# switch to workspace
+# switch focus to workspace
 bindsym $alt+1 workspace number $workspace1
 bindsym $alt+2 workspace number $workspace2
 bindsym $alt+3 workspace number $workspace3
@@ -199,23 +199,31 @@ bindsym $alt+$ctrl+Left focus output left
 bindsym $alt+$ctrl+Right focus output Right
 
 # move focused container to workspace
-bindsym $alt+Shift+1 move container to workspace number $workspace1
-bindsym $alt+Shift+2 move container to workspace number $workspace2
-bindsym $alt+Shift+3 move container to workspace number $workspace3
-bindsym $alt+Shift+4 move container to workspace number $workspace4
-bindsym $alt+Shift+5 move container to workspace number $workspace5
-bindsym $alt+Shift+6 move container to workspace number $workspace6
-bindsym $alt+Shift+7 move container to workspace number $workspace7
-bindsym $alt+Shift+8 move container to workspace number $workspace8
-bindsym $alt+Shift+9 move container to workspace number $workspace9
-bindsym $alt+Shift+0 move container to workspace number $workspace10
+bindsym $alt+Shift+1 move container to workspace number $workspace1; workspace number $workspace1
+bindsym $alt+Shift+2 move container to workspace number $workspace2; workspace number $workspace2
+bindsym $alt+Shift+3 move container to workspace number $workspace3; workspace number $workspace3
+bindsym $alt+Shift+4 move container to workspace number $workspace4; workspace number $workspace4
+bindsym $alt+Shift+5 move container to workspace number $workspace5; workspace number $workspace5
+bindsym $alt+Shift+6 move container to workspace number $workspace6; workspace number $workspace6
+bindsym $alt+Shift+7 move container to workspace number $workspace7; workspace number $workspace7
+bindsym $alt+Shift+8 move container to workspace number $workspace8; workspace number $workspace8
+bindsym $alt+Shift+9 move container to workspace number $workspace9; workspace number $workspace9
+bindsym $alt+Shift+0 move container to workspace number $workspace10; workspace number $workspace10
+
+bindsym $alt+$sup+Shift+Left move container to workspace prev; workspace prev
+bindsym $alt+$sup+Shift+Right move container to workspace next; workspace next
+bindsym $alt+$sup+Shift+h move container to workspace prev; workspace prev
+bindsym $alt+$sup+Shift+l move container to workspace next; workspace next
 
 # move workspace to screen
-bindsym $alt+$ctrl+Shift+1 move workspace to output $screenleft
-bindsym $alt+$ctrl+Shift+2 move workspace to output $screenmiddle
-bindsym $alt+$ctrl+Shift+3 move workspace to output $screenright
-bindsym $alt+$ctrl+Shift+Left move workspace to output left
-bindsym $alt+$ctrl+Shift+Right move workspace to output right
+bindsym $alt+$ctrl+Shift+1 move workspace to output $screenleft; focus output $screenleft
+bindsym $alt+$ctrl+Shift+2 move workspace to output $screenmiddle; focus output $screenmiddle
+bindsym $alt+$ctrl+Shift+3 move workspace to output $screenright; focus output $screenright
+
+bindsym $alt+$ctrl+Shift+Left move workspace to output left; focus output left
+bindsym $alt+$ctrl+Shift+Right move workspace to output right; focus output right
+bindsym $alt+$ctrl+Shift+h move workspace to output left; focus output left
+bindsym $alt+$ctrl+Shift+l move workspace to output right; focus output right
 
 
 # Assign Output ---
@@ -241,6 +249,9 @@ for_window [class="Google-chrome" window_role="pop-up"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [title="Zotero Preferences"] floating enable
+
+# follow new windows
+for_window [urgent=latest] focus
 
 # Modes ------------------------------------------------------------------------
 
