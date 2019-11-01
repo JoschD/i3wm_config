@@ -2,6 +2,7 @@
 #----------------------------------------------------------------------------------------------------
 #Directory whose available space is to be displayed
 dir="${BLOCK_INSTANCE:-$HOME}";
+# dir="/";
 
 #Color text red when less than 10% space is available
 lowAlert=10; 
@@ -12,7 +13,7 @@ avail=$(df -h -P -l "$dir" | tail -1 | awk '{print $4}' | tr -dc '0-9');
 
 #Display output
 if (( $(( $avail*100/$total )) < $lowAlert )); then
-	echo "<span foreground='red'>${avail}G</span>";
+	echo "<span foreground='red'>${avail}G/${total}G</span>";
 else
-	echo "${avail}G";
+	echo "${avail}G/${total}G";
 fi

@@ -2,35 +2,93 @@ command=/home/jdilly/.config/i3/i3blocklets/$BLOCK_NAME
 separator_block_width=15
 
 [music]
-label= 🎧
 interval=1
 signal=3
 
-#[gmail]
-#label=📧
-#interval=1800
-#instance=.gmail
-#signal=2
+
+[volume]
+interval=once
+signal=1
+
 
 [loadavg]
 label=
 interval=10
 markup=pango
 
+
+[bandwidth]
+interval=5
+#instance=eth0
+
+
+#[internet]
+#interval=1800
+#markup=pango
+
+
+[afs]
+instance=/afs/cern.ch/user/j/jdilly/
+markup=pango
+interval=600
+label=
+
+
+[afs]
+instance=/afs/cern.ch/work/j/jdilly/
+markup=pango
+interval=600
+label=
+
+
 [disk]
-label=🗄
+instance=/
+label=
 interval=3600
 
-[volume]
-interval=once
-signal=1
+
+[disk]
+instance=/media/jdilly/Storage/
+label=
+interval=3600
+
+
+[memory]
+label=🐏
+interval=30
+
+[memory]
+label=💿
+instance=swap
+interval=30
+
+
 
 [date]
 label=📅
 interval=5
 command=echo $(date '+%d %b %Y')
 
+
 [time]
 label=🕓
 interval=5
 command=echo $(date '+%H:%M:%S')
+
+
+[monitors]
+interval=once
+#SHOW_ON_OFF=1
+#SHOW_NAMES=1
+#SHOW_PRIMARY=1
+#SHOW_MODE=1
+#SHOW_BLANKED=1
+#SHOW_DUPLICATE=1
+#SHOW_ROTATION=1
+#SHOW_REFLECTION=1
+#SHOW_BRIGHTNESS=1
+#SHOW_BRIGHTNESS_VALUE=0
+#SHOW_UP_DOWN=1
+#FONT_FAMILY=DejaVu Sans Mono
+#FONT_SIZE=11
+#CLOSE_TO_BOUNDARY_BUFFER=20

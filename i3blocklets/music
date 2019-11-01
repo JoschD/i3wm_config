@@ -9,9 +9,9 @@
 [[ "$(playerctl status 2>&1)" = "No players found" ]] && exit 33;
 
 # Define cursor icons
-playIcon="";
-pauseIcon=" ⏸️";
-stopIcon=" ⏹️";
+playIcon="🎧";
+pauseIcon="⏸️";
+stopIcon="⏹️";
 
 #User provided args for playerctl
 ARGUMENTS="$INSTANCE";
@@ -42,9 +42,9 @@ fi
 
 #Display output
 if [[ "${playerStatus^}" = "Paused" ]]; then
-	echo "$songInfo$songDuration$pauseIcon";
+	echo "$pauseIcon $songInfo$songDuration";
 elif [[ "${playerStatus^}" = "Playing" ]]; then
-	echo "$songInfo$songDuration$playIcon";
+	echo "$playIcon $songInfo$songDuration";
 elif [[ "${playerStatus^}" = "Stopped" ]]; then
-	echo "Stopped$stopIcon";
+	echo "$stopIcon Stopped";
 fi

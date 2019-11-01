@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+
+# Show usage information for an AFS directory.
+
+# Copyright 2017 Johannes Lange
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import argparse
+import os
+import subprocess as sp
+
+def _get_from_i3blocks(name, default='', arg_type=str):
+    val = os.environ.get(name, default)
+    return arg_type(val)
+
+
+# set the afs directory to be checked
+directory = _get_from_i3blocks('BLOCK_INSTANCE', '~/afs/')
+# directory = _get_from_i3blocks('instance', '~/afs/')
+label = _get_from_i3blocks('label', '')
+
+# critical fill (in percent)
+critical = _get_from_i3blocks('critical', 95, int)
+fg_color = _get_from_i3blocks('crit_fg_color', "#FF0000")
+bg_color = _get_from_i3blocks('crit_bg_color', '')
+
+# expand environment variables etc.
+directory = os.path.expandvars(directory)
+directory = os.path.expanduser(directory)
+
+fs_output = sp.check_output(['fs', 'lq', '-human', directory],
+                            universal_newlines=True)
+
+# second line contains the information
+fs_output = fs_output.split('\n')[1]
+quota, used, percentage = fs_output.split()[1:4]
+percentage = int(percentage.split('%')[0])
+
+# output = f'{label}{used}/{quota} ({percentage:d}%)'
+output = f'{label} {used}/{quota}'
+
+if percentage >= critical:
+    if bg_color:
+        output = f"<span color='{fg_color}' bgcolor='{bg_color}'>{output}</span>"
+    else:
+        output = f"<span color='{fg_color}'>{output}</span>"
+
+print(output)
