@@ -10,7 +10,28 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 
+# i3 config --------------------------------------------------------------------
+
+## Don't follow mouse for focus
+focus_follows_mouse no
+
+## Hide window borders
+hide_edge_borders both
+
+
+# Font Setup -------------------------------------------------------------------
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:DejaVu Sans Mono, FontAwesome 8
+
+
 # Aliases ----------------------------------------------------------------------
+
 # Key-Aliases
 set $alt Mod1
 set $sup Mod4
@@ -20,6 +41,9 @@ set $ctrl Control
 set $screenleft DP-1
 set $screenmiddle DP-2
 set $screenright DP-3
+
+# Devices
+set $headphones bluez_sink.E8_07_BF_00_78_93.a2dp_sink
 
 # Workspaces
 set $workspace1 1:Main
@@ -33,23 +57,9 @@ set $workspace8 8:Browser
 set $workspace9 9:Social
 set $workspace10 0:Terminals
 
-# Font Setup -------------------------------------------------------------------
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
 
 # General Keybindings ----------------------------------------------------------
+
 # Use Mouse+$alt to drag floating windows to their wanted position
 floating_modifier $alt
 
@@ -60,13 +70,20 @@ bindsym $alt+Shift+c reload
 bindsym $alt+Shift+r restart
 
 # lock screen
-bindsym $sup+l exec "gnome-screensaver-command -l"
+# bindsym $sup+l exec "gnome-screensaver-command -l"
+bindsym $sup+l exec "i3lock"
 
 # exit i3 (logs you out of your X session)
 bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# Volume Control 
+bindsym $sup+Next exec pactl set-sink-volume $headphones -5%
+bindsym $sup+Prior exec pactl set-sink-volume $headphones +5%
+bindsym $sup+Home exec pactl set-sink-mute $headphones toggle
+
 
 # Start Programs ---------------------------------------------------------------
+
 # dmenu (a program launcher)
 bindsym $alt+d exec dmenu_run
 
@@ -91,6 +108,7 @@ bindsym $alt+F4 kill
 # - choosen window
 bindsym $ctrl+$alt+Delete --release exec "xwininfo | grep 'Window id:' | awk -F' ' '{print $4}' | xargs -I{} i3 '[id={}] kill'"
 bindsym $ctrl+$alt+Shift+Delete --release exec xkill
+
 
 # Screenshots ------------------------------------------------------------------
 
@@ -124,6 +142,7 @@ bindsym --release $sup+$ctrl+Shift+Print exec --no-startup-id "maim -st 9999999 
 
 
 # Windows and Workspaces -------------------------------------------------------
+
 # rename, bindings for moving stay intact when using names like "2:Test"
 bindsym $alt+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 
@@ -227,10 +246,10 @@ bindsym $alt+$ctrl+Shift+l move workspace to output right; focus output right
 
 
 # Assign Output ---
-workspace number $workspace1 output $screenmiddle
-workspace number $workspace8 output $screenright
-workspace number $workspace9 output $screenleft
-workspace number $workspace10 output $screenleft
+workspace $workspace1 output $screenmiddle
+workspace $workspace8 output $screenright
+workspace $workspace9 output $screenleft
+workspace $workspace10 output $screenleft
 
 # Default workspaces ---
 for_window [class="Google-chrome"] move to workspace number $workspace8
@@ -282,12 +301,40 @@ mode "resize" {
 bindsym $alt+r mode "resize"
 
 
+## Switch to Power-Off mode
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
+mode "$mode_system" {
+
+    bindsym l exec --no-startup-id "gnome-screensaver-command -l", mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id "sudo pm-suspend", mode "default"
+    bindsym h exec --no-startup-id "sudo pm-hibernate", mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+
+    ### Return back to normal
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $sup+Shift+L mode "$mode_system"
+
 # Startup ----------------------------------------------------------------------
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
+    #status_command i3blocks
+    colors {
+        statusline  #DDDDDD
+        separator   #666666
+        # class             border  backgr. text
+        focused_workspace   #2B83A6 #2B83A6 #FFFFFF
+        active_workspace    #212121 #212121 #FFFFFF
+        inactive_workspace  #212121 #212121 #86888C
+        urgent_workspace    #D64E4E #D64E4E #FFFFFF
+    }
 }
 
 exec_always --no-startup-id "setxkbmap -layout eu -option caps:swapescape"
