@@ -1,0 +1,36 @@
+command=/home/jdilly/.config/i3/i3blocklets/$BLOCK_NAME
+separator_block_width=15
+
+[music]
+label= 🎧
+interval=1
+signal=3
+
+#[gmail]
+#label=📧
+#interval=1800
+#instance=.gmail
+#signal=2
+
+[loadavg]
+label=
+interval=10
+markup=pango
+
+[disk]
+label=🗄
+interval=3600
+
+[volume]
+interval=once
+signal=1
+
+[date]
+label=📅
+interval=5
+command=echo $(date '+%d %b %Y')
+
+[time]
+label=🕓
+interval=5
+command=echo $(date '+%H:%M:%S')
