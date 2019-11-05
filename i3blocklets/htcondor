@@ -24,7 +24,7 @@ hold=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) held.*,\1,');
 
 
 case $BLOCK_BUTTON in
-	2) gnome-terminal -e 'condor_q' ;;
+	2) gnome-terminal -e "sh -c 'condor_q;read line'" >> /dev/null ;;
 esac
 
 if [ "$idle" != "0" ]; then
