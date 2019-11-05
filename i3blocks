@@ -30,33 +30,33 @@ interval=5
 [htcondor]
 label=
 markup=pango
-interval=600
+interval=3000
 
 
 [afs]
 instance=/afs/cern.ch/user/j/jdilly/
 markup=pango
-interval=600
+interval=3000
 label=
 
 
 [afs]
 instance=/afs/cern.ch/work/j/jdilly/
 markup=pango
-interval=600
+interval=3000
 label=
 
 
 [disk]
 instance=/
 label=
-interval=3600
+interval=3000
 
 
 [disk]
 instance=/media/jdilly/Storage/
 label=
-interval=3600
+interval=3000
 
 
 [memory]
@@ -72,13 +72,13 @@ interval=30
 
 [date]
 label=📅
-interval=5
+interval=60
 command=echo $(date '+%d %b %Y')
 
 
 [time]
 label=🕓
-interval=5
+interval=1
 command=echo $(date '+%H:%M:%S')
 
 
