@@ -19,7 +19,7 @@
 status=$(condor_q);
 jobs=$(echo "${status}" | tail -n 1 | sed -e 's,^\([0-9]\+\) jobs.*,\1,');
 idle=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) idle.*,\1,');
-runn=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) runn.*,\1,');
+runn=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) running.*,\1,');
 hold=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) held.*,\1,');
 
 
