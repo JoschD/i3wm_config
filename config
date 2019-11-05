@@ -71,7 +71,7 @@ bindsym $alt+Shift+r restart
 
 # lock screen
 # bindsym $sup+l exec "gnome-screensaver-command -l"
-bindsym $sup+l exec "i3lock"
+bindsym $sup+BackSpace exec "i3lock"
 
 # exit i3 (logs you out of your X session)
 bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -213,8 +213,8 @@ bindsym $sup+0 workspace number $workspace10
 
 bindsym $sup+Left workspace prev
 bindsym $sup+Right workspace next
-#bindsym $sup+h workspace prev
-#bindsym $sup+l workspace next  # clashes with lockscreen
+bindsym $sup+h workspace prev
+bindsym $sup+l workspace next
 
 
 # move focused container to workspace
@@ -325,7 +325,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-bindsym $sup+Shift+L mode "$mode_system"
+bindsym $sup+Shift+BackSpace mode "$mode_system"
 
 
 ## No keybindings mode
