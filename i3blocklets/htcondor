@@ -1,0 +1,45 @@
+#!/bin/bash
+# ------------------------------------------------------------------------------
+# Check your current HTCondor status and prints out Jobs:Running/Idle/Hold numbers.
+# Copyright (C) 2019 JoschD
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# ------------------------------------------------------------------------------
+status=$(condor_q);
+jobs=$(echo "${status}" | tail -n 1 | sed -e 's,^\([0-9]\+\) jobs.*,\1,');
+idle=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) idle.*,\1,');
+runn=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) runn.*,\1,');
+hold=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) held.*,\1,');
+
+
+case $BLOCK_BUTTON in
+	2) gnome-terminal -e 'condor_q' ;;
+esac
+
+if [ "$idle" != "0" ]; then
+   idle="<span foreground='#FAAC58'>$idle</span>";
+fi
+
+if [ "$runn" != "0" ]; then
+   runn="<span foreground='#04B431'>$runn</span>";
+fi
+
+if [ "$hold" != "0" ]; then
+   hold="<span foreground='#F17979'>$hold</span>";
+fi
+
+
+if [ "$jobs" != "0" ]; then
+  echo "$jobs:$runn/$idle/$hold";
+fi

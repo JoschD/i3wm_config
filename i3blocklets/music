@@ -18,11 +18,12 @@ ARGUMENTS="$INSTANCE";
 
 #Mouse actions for the block
 case $BLOCK_BUTTON in
-	1) playerctl $ARGUMENTS previous ;;
-	2) playerctl $ARGUMENTS play-pause ;;
-	3) playerctl $ARGUMENTS next ;;
+	1) playerctl $ARGUMENTS play-pause ;;
+	2) playerctl $ARGUMENTS stop ;;
 	4) playerctl $ARGUMENTS position 5+ ;;
 	5) playerctl $ARGUMENTS position 5- ;;
+	6) playerctl $ARGUMENTS previous ;;
+	7) playerctl $ARGUMENTS next ;;
 esac
 
 #Define song info variables

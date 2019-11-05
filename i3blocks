@@ -27,6 +27,12 @@ interval=5
 #markup=pango
 
 
+[htcondor]
+label=
+markup=pango
+interval=600
+
+
 [afs]
 instance=/afs/cern.ch/user/j/jdilly/
 markup=pango
@@ -92,3 +98,4 @@ interval=once
 #FONT_FAMILY=DejaVu Sans Mono
 #FONT_SIZE=11
 #CLOSE_TO_BOUNDARY_BUFFER=20
+
