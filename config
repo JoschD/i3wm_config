@@ -71,7 +71,7 @@ bindsym $alt+Shift+r restart
 
 # lock screen
 # bindsym $sup+l exec "gnome-screensaver-command -l"
-bindsym $sup+BackSpace exec "i3lock"
+bindsym $sup+BackSpace exec "i3lock -i /home/jdilly/Pictures/fullbg.png"
 
 # exit i3 (logs you out of your X session)
 bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
