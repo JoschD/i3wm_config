@@ -4,7 +4,7 @@ threshold=${BLOCK_INSTANCE:-5};
 load=$(cut -d ' ' -f1 /proc/loadavg);
 
 case $BLOCK_BUTTON in
-	2) gnome-terminal -e 'htop' ;;
+	2) gnome-terminal -- 'htop' ;;
 esac
 
 #Display as red if load exceeds threshold

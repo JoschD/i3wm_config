@@ -24,7 +24,7 @@ hold=$(echo "${status}" | tail -n 1 | sed -e 's,.* \([0-9]\+\) held.*,\1,');
 
 
 case $BLOCK_BUTTON in
-	2) gnome-terminal -e "sh -c 'condor_q;read line'" >> /dev/null ;;
+	2) gnome-terminal -- /bin/bash -c 'condor_q;read line' ;;
 esac
 
 if [ "$idle" != "0" ]; then
@@ -38,7 +38,6 @@ fi
 if [ "$hold" != "0" ]; then
    hold="<span foreground='#F17979'>$hold</span>";
 fi
-
 
 if [ "$jobs" != "0" ]; then
   echo "$jobs:$runn/$idle/$hold";
