@@ -353,6 +353,8 @@ bar {
         inactive_workspace  #212121 #212121 #86888C
         urgent_workspace    #D64E4E #D64E4E #FFFFFF
     }
+    # tray_output $screenmiddle
+    tray_output none
 }
 
 exec_always --no-startup-id "setxkbmap -layout eu -option caps:swapescape"
